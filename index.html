@@ -4,364 +4,694 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FaithClock - A Bible Verse for Every Minute</title>
-  <meta name="description" content="Transform your device into a beautiful Bible Clock. Display scripture verses matched to the current time, paired with your favorite photos.">
+  <meta name="description" content="Transform your iPad or iPhone into a beautiful Bible Clock. Scripture verses matched to the current time, paired with your favorite photos.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-primary: #0a0a0b;
+      --bg-secondary: #141416;
+      --bg-card: #1c1c1f;
+      --text-primary: #ffffff;
+      --text-secondary: #9ca3af;
+      --accent: #c9a66b;
+      --accent-light: #e3c99a;
+      --border: rgba(255,255,255,0.08);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      color: #fff;
-      min-height: 100vh;
-      line-height: 1.6;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 24px;
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10,10,11,0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+
+    .nav-logo span {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
     }
 
     /* Hero Section */
     .hero {
-      text-align: center;
-      padding: 40px 0 60px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 40px 80px;
+      position: relative;
     }
 
-    .app-icon {
-      width: 120px;
-      height: 120px;
-      border-radius: 28px;
-      margin: 0 auto 32px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
     }
 
-    .app-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.5rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .hero-text {
+      max-width: 540px;
     }
 
-    .tagline {
-      font-size: 1.4rem;
-      color: #a0aec0;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201, 166, 107, 0.1);
+      border: 1px solid rgba(201, 166, 107, 0.3);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--accent-light);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.8rem;
       font-weight: 400;
-      margin-bottom: 40px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
     }
 
-    .app-store-badge {
-      display: inline-block;
-      transition: transform 0.2s ease;
+    h1 span {
+      color: var(--accent);
     }
 
-    .app-store-badge:hover {
-      transform: scale(1.05);
-    }
-
-    .app-store-badge img {
-      height: 54px;
-    }
-
-    .coming-soon {
-      display: inline-block;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 14px 32px;
-      border-radius: 12px;
-      font-weight: 500;
-      color: #a0aec0;
-    }
-
-    /* Description */
-    .description {
-      text-align: center;
-      padding: 40px 0;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .description p {
+    .hero-description {
       font-size: 1.2rem;
-      color: #cbd5e0;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #000;
+      padding: 16px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      padding: 16px 24px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      color: var(--text-primary);
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 24px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    }
+
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      bottom: -20px;
+      left: -20px;
+      background: linear-gradient(135deg, rgba(201,166,107,0.1) 0%, transparent 50%);
+      border-radius: 32px;
+      z-index: -1;
+    }
+
+    /* How It Works */
+    .how-it-works {
+      padding: 120px 40px;
+      background: var(--bg-secondary);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 80px;
+    }
+
+    .section-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .section-description {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .verse-demo {
       max-width: 600px;
       margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 60px;
+      text-align: center;
+    }
+
+    .verse-time {
+      font-family: 'DM Sans', monospace;
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 32px;
+      letter-spacing: 0.05em;
+    }
+
+    .verse-content {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+
+    .verse-reference {
+      color: var(--text-secondary);
+      font-size: 1rem;
     }
 
     /* Features */
     .features {
-      padding: 60px 0;
-    }
-
-    .features h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 48px;
+      padding: 120px 40px;
     }
 
     .features-grid {
+      max-width: 1100px;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
     }
 
     .feature-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 32px;
-      transition: transform 0.2s ease, background 0.2s ease;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      transition: border-color 0.3s, transform 0.3s;
     }
 
     .feature-card:hover {
+      border-color: rgba(201,166,107,0.3);
       transform: translateY(-4px);
-      background: rgba(255,255,255,0.08);
     }
 
     .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
-    }
-
-    .feature-card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .feature-card p {
-      color: #a0aec0;
-      font-size: 0.95rem;
-    }
-
-    /* How it Works */
-    .how-it-works {
-      padding: 60px 0;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .how-it-works h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      width: 48px;
+      height: 48px;
+      background: rgba(201,166,107,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
       margin-bottom: 24px;
     }
 
-    .verse-example {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 40px;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .verse-time {
-      font-family: monospace;
-      font-size: 3rem;
-      font-weight: 700;
-      color: #667eea;
-      margin-bottom: 16px;
-    }
-
-    .verse-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-style: italic;
-      color: #e2e8f0;
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
       margin-bottom: 12px;
     }
 
-    .verse-ref {
-      color: #a0aec0;
+    .feature-card p {
+      color: var(--text-secondary);
       font-size: 0.95rem;
+      line-height: 1.6;
     }
 
-    /* Screenshots */
-    .screenshots {
-      padding: 60px 0;
+    /* Gallery */
+    .gallery {
+      padding: 120px 40px;
+      background: var(--bg-secondary);
+    }
+
+    .gallery-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .gallery-item.featured {
+      grid-column: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 120px 40px;
       text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.1);
     }
 
-    .screenshots h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+    .cta-box {
+      max-width: 700px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(201,166,107,0.15) 0%, rgba(201,166,107,0.05) 100%);
+      border: 1px solid rgba(201,166,107,0.2);
+      border-radius: 32px;
+      padding: 80px 60px;
+    }
+
+    .cta-box h2 {
+      margin-bottom: 16px;
+    }
+
+    .cta-box p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
       margin-bottom: 40px;
     }
 
-    .screenshot-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .screenshot-item img {
-      width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    }
-
-    .screenshot-item p {
+    .price-tag {
+      display: inline-block;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
       margin-top: 16px;
-      color: #a0aec0;
-      font-size: 0.95rem;
     }
 
     /* Footer */
     footer {
-      padding: 40px 0;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      margin-top: 40px;
+      padding: 60px 40px;
+      border-top: 1px solid var(--border);
     }
 
-    footer nav {
-      margin-bottom: 24px;
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
     }
 
-    footer a {
-      color: #a0aec0;
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+
+    .footer-logo span {
+      font-weight: 600;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
       text-decoration: none;
-      margin: 0 16px;
-      font-size: 0.95rem;
-      transition: color 0.2s ease;
+      font-size: 0.9rem;
+      transition: color 0.2s;
     }
 
-    footer a:hover {
-      color: #fff;
+    .footer-links a:hover {
+      color: var(--text-primary);
     }
 
-    .copyright {
-      color: #718096;
+    .footer-copyright {
+      color: var(--text-secondary);
       font-size: 0.85rem;
     }
 
     /* Responsive */
-    @media (max-width: 600px) {
-      .app-name {
-        font-size: 2.5rem;
+    @media (max-width: 900px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        text-align: center;
       }
 
-      .tagline {
-        font-size: 1.1rem;
+      .hero-text {
+        max-width: 100%;
       }
 
-      .container {
-        padding: 40px 20px;
+      .cta-group {
+        justify-content: center;
       }
 
-      .verse-time {
+      .hero-image {
+        order: -1;
+      }
+
+      .hero-image img {
+        max-width: 400px;
+        margin: 0 auto;
+        display: block;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+      }
+
+      h2 {
         font-size: 2.2rem;
       }
 
-      .verse-text {
-        font-size: 1.1rem;
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item.featured {
+        grid-column: span 1;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        padding: 16px 24px;
+      }
+
+      .hero {
+        padding: 100px 24px 60px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-description {
+        font-size: 1rem;
+      }
+
+      .how-it-works,
+      .features,
+      .gallery,
+      .cta-section {
+        padding: 80px 24px;
+      }
+
+      .verse-demo {
+        padding: 40px 24px;
+      }
+
+      .verse-time {
+        font-size: 2.5rem;
+      }
+
+      .verse-content {
+        font-size: 1.2rem;
+      }
+
+      .cta-box {
+        padding: 48px 24px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Hero -->
-    <section class="hero">
-      <img src="app-icon.png" alt="FaithClock App Icon" class="app-icon">
-      <h1 class="app-name">FaithClock</h1>
-      <p class="tagline">A Bible Verse for Every Minute</p>
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="app-icon.png" alt="FaithClock">
+      <span>FaithClock</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#gallery">Gallery</a>
+      <a href="support.html">Support</a>
+    </div>
+  </nav>
 
-      <!-- Replace with actual App Store link once available -->
-      <span class="coming-soon">Coming Soon to the App Store</span>
-
-      <!-- Uncomment and add your App Store link once approved:
-      <a href="https://apps.apple.com/app/idYOURAPPID" class="app-store-badge">
-        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
-      </a>
-      -->
-    </section>
-
-    <!-- Description -->
-    <section class="description">
-      <p>Transform your iPhone or iPad into a beautiful Bible Clock. FaithClock displays scripture verses that match the current time, paired with your favorite photos as backgrounds.</p>
-    </section>
-
-    <!-- How it Works -->
-    <section class="how-it-works">
-      <h2>How It Works</h2>
-      <div class="verse-example">
-        <div class="verse-time">3:16</div>
-        <p class="verse-text">"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."</p>
-        <p class="verse-ref">— John 3:16</p>
-      </div>
-    </section>
-
-    <!-- Features -->
-    <section class="features">
-      <h2>Features</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">📖</div>
-          <h3>1,500+ Verses</h3>
-          <p>A curated collection of Bible verses mapped to every minute of the day using the Berean Standard Bible translation.</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Available on iPhone & iPad
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🖼️</div>
-          <h3>Photo Backgrounds</h3>
-          <p>Display your own photos from any album as beautiful rotating backgrounds with smooth transition effects.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">✨</div>
-          <h3>Elegant Design</h3>
-          <p>Modern glass-effect interface with customizable fonts and text sizes for both verses and the clock display.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔒</div>
-          <h3>Private & Offline</h3>
-          <p>No accounts, no tracking, no internet required. Your photos and settings stay on your device.</p>
+        <h1>A Bible Verse for <span>Every Minute</span></h1>
+        <p class="hero-description">Transform your device into a beautiful Bible Clock. Scripture that matches the time, paired with your favorite photos. Perfect for your nightstand, desk, or living room.</p>
+        <div class="cta-group">
+          <a href="#" class="btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download for iOS
+          </a>
+          <a href="#features" class="btn-secondary">Learn more →</a>
         </div>
       </div>
-    </section>
+      <div class="hero-image">
+        <img src="screenshot-lifestyle.jpg" alt="FaithClock on iPad in living room">
+      </div>
+    </div>
+  </section>
 
-    <!-- Screenshots -->
-    <section class="screenshots">
+  <!-- How It Works -->
+  <section class="how-it-works" id="how">
+    <div class="section-header">
+      <p class="section-label">How It Works</p>
+      <h2>Time Meets Scripture</h2>
+      <p class="section-description">The clock doesn't just tell time—it speaks truth. Each minute is paired with a verse that matches.</p>
+    </div>
+    <div class="verse-demo">
+      <div class="verse-time">3:16</div>
+      <p class="verse-content">"For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life."</p>
+      <p class="verse-reference">— John 3:16 BSB</p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <p class="section-label">Features</p>
+      <h2>Thoughtfully Designed</h2>
+      <p class="section-description">Every detail crafted to bring faith and beauty into your daily life.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📖</div>
+        <h3>1,500+ Curated Verses</h3>
+        <p>A carefully selected collection from the Berean Standard Bible, mapped to every minute of the day. Fresh scripture with every glance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🖼️</div>
+        <h3>Your Photos, Your Memories</h3>
+        <p>Choose any album from your photo library. Family portraits, nature shots, or cherished memories as your backdrop.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✨</div>
+        <h3>Elegant Glass Interface</h3>
+        <p>Modern design with customizable fonts and sizes. Looks beautiful on any photo, day or night.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Private & Offline</h3>
+        <p>No accounts. No tracking. No internet required. Your photos and settings never leave your device.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery" id="gallery">
+    <div class="section-header">
+      <p class="section-label">Gallery</p>
       <h2>See It in Action</h2>
-      <div class="screenshot-grid">
-        <div class="screenshot-item">
-          <img src="screenshot-lifestyle.jpg" alt="FaithClock on iPad in living room">
-          <p>Perfect as a bedside clock or living room display</p>
-        </div>
-        <div class="screenshot-item">
-          <img src="screenshot-app.png" alt="FaithClock app interface">
-          <p>Your photos paired with meaningful scripture</p>
-        </div>
-        <div class="screenshot-item">
-          <img src="screenshot-promo.png" alt="FaithClock on iPad">
-          <p>Every minute displays its own matched verse</p>
-        </div>
+      <p class="section-description">Beautiful on your nightstand, desk, or anywhere you need a moment of reflection.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item featured">
+        <img src="screenshot-promo.png" alt="FaithClock displaying John 3:16">
+        <div class="gallery-caption">Every minute displays its own matched verse</div>
       </div>
-    </section>
+      <div class="gallery-item">
+        <img src="screenshot-app.png" alt="FaithClock app interface">
+        <div class="gallery-caption">Pair scripture with your favorite photos</div>
+      </div>
+      <div class="gallery-item">
+        <img src="screenshot-lifestyle.jpg" alt="FaithClock in home setting">
+        <div class="gallery-caption">Perfect for any room in your home</div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-      <nav>
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-box">
+      <h2>Start Your Day with Scripture</h2>
+      <p>Download FaithClock and transform any moment into an opportunity for reflection.</p>
+      <a href="#" class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download for iOS
+      </a>
+      <p class="price-tag">Just $0.99 · One-time purchase · No subscriptions</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="app-icon.png" alt="FaithClock">
+        <span>FaithClock</span>
+      </div>
+      <div class="footer-links">
         <a href="privacy.html">Privacy Policy</a>
         <a href="support.html">Support</a>
         <a href="mailto:andrew@stewardly.ai">Contact</a>
-      </nav>
-      <p class="copyright">© 2026 FaithClock. All rights reserved.</p>
-    </footer>
-  </div>
+      </div>
+      <p class="footer-copyright">© 2026 FaithClock. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
