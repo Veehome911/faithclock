@@ -188,6 +188,39 @@
       font-size: 0.95rem;
     }
 
+    /* Screenshots */
+    .screenshots {
+      padding: 60px 0;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .screenshots h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .screenshot-item img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .screenshot-item p {
+      margin-top: 16px;
+      color: #a0aec0;
+      font-size: 0.95rem;
+    }
+
     /* Footer */
     footer {
       padding: 40px 0;
@@ -297,6 +330,25 @@
           <div class="feature-icon">🔒</div>
           <h3>Private & Offline</h3>
           <p>No accounts, no tracking, no internet required. Your photos and settings stay on your device.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screenshots -->
+    <section class="screenshots">
+      <h2>See It in Action</h2>
+      <div class="screenshot-grid">
+        <div class="screenshot-item">
+          <img src="screenshot-lifestyle.jpg" alt="FaithClock on iPad in living room">
+          <p>Perfect as a bedside clock or living room display</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="screenshot-app.png" alt="FaithClock app interface">
+          <p>Your photos paired with meaningful scripture</p>
+        </div>
+        <div class="screenshot-item">
+          <img src="screenshot-promo.png" alt="FaithClock on iPad">
+          <p>Every minute displays its own matched verse</p>
         </div>
       </div>
     </section>
