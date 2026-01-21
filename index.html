@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FaithClock - A Bible Verse for Every Minute</title>
+  <meta name="description" content="Transform your device into a beautiful Bible Clock. Display scripture verses matched to the current time, paired with your favorite photos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 40px 0 60px;
+    }
+
+    .app-icon {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 28px;
+      margin: 0 auto 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+    }
+
+    .app-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: 1.4rem;
+      color: #a0aec0;
+      font-weight: 400;
+      margin-bottom: 40px;
+    }
+
+    .app-store-badge {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .app-store-badge:hover {
+      transform: scale(1.05);
+    }
+
+    .app-store-badge img {
+      height: 54px;
+    }
+
+    .coming-soon {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: 500;
+      color: #a0aec0;
+    }
+
+    /* Description */
+    .description {
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .description p {
+      font-size: 1.2rem;
+      color: #cbd5e0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Features */
+    .features {
+      padding: 60px 0;
+    }
+
+    .features h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 32px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      color: #a0aec0;
+      font-size: 0.95rem;
+    }
+
+    /* How it Works */
+    .how-it-works {
+      padding: 60px 0;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .how-it-works h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 24px;
+    }
+
+    .verse-example {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .verse-time {
+      font-family: monospace;
+      font-size: 3rem;
+      font-weight: 700;
+      color: #667eea;
+      margin-bottom: 16px;
+    }
+
+    .verse-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: #e2e8f0;
+      margin-bottom: 12px;
+    }
+
+    .verse-ref {
+      color: #a0aec0;
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 40px;
+    }
+
+    footer nav {
+      margin-bottom: 24px;
+    }
+
+    footer a {
+      color: #a0aec0;
+      text-decoration: none;
+      margin: 0 16px;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    .copyright {
+      color: #718096;
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .app-name {
+        font-size: 2.5rem;
+      }
+
+      .tagline {
+        font-size: 1.1rem;
+      }
+
+      .container {
+        padding: 40px 20px;
+      }
+
+      .verse-time {
+        font-size: 2.2rem;
+      }
+
+      .verse-text {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="app-icon">🕐</div>
+      <h1 class="app-name">FaithClock</h1>
+      <p class="tagline">A Bible Verse for Every Minute</p>
+
+      <!-- Replace with actual App Store link once available -->
+      <span class="coming-soon">Coming Soon to the App Store</span>
+
+      <!-- Uncomment and add your App Store link once approved:
+      <a href="https://apps.apple.com/app/idYOURAPPID" class="app-store-badge">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+      </a>
+      -->
+    </section>
+
+    <!-- Description -->
+    <section class="description">
+      <p>Transform your iPhone or iPad into a beautiful Bible Clock. FaithClock displays scripture verses that match the current time, paired with your favorite photos as backgrounds.</p>
+    </section>
+
+    <!-- How it Works -->
+    <section class="how-it-works">
+      <h2>How It Works</h2>
+      <div class="verse-example">
+        <div class="verse-time">3:16</div>
+        <p class="verse-text">"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."</p>
+        <p class="verse-ref">— John 3:16</p>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <h2>Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📖</div>
+          <h3>1,500+ Verses</h3>
+          <p>A curated collection of Bible verses mapped to every minute of the day using the Berean Standard Bible translation.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🖼️</div>
+          <h3>Photo Backgrounds</h3>
+          <p>Display your own photos from any album as beautiful rotating backgrounds with smooth transition effects.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3>Elegant Design</h3>
+          <p>Modern glass-effect interface with customizable fonts and text sizes for both verses and the clock display.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Private & Offline</h3>
+          <p>No accounts, no tracking, no internet required. Your photos and settings stay on your device.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <nav>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="support.html">Support</a>
+        <a href="mailto:andrew@stewardly.ai">Contact</a>
+      </nav>
+      <p class="copyright">© 2026 FaithClock. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
