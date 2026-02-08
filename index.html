@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FaithClock - Scripture & Memories, Every Minute</title>
-  <meta name="description" content="Transform your iPad or iPhone into a beautiful Bible Clock. Scripture verses matched to the current time, paired with your favorite photos.">
+  <title>FaithClock - Bible Verse Clock for iPhone & iPad</title>
+  <meta name="description" content="When the clock reads 3:16, you see John 3:16. 1,599 Bible verses synced to every minute of the day, paired with your own photos. Just $0.99 — no ads, no subscriptions.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
@@ -463,6 +463,10 @@
 
     /* Responsive */
     @media (max-width: 900px) {
+      .steps {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
       .hero-content {
         grid-template-columns: 1fr;
         gap: 60px;
@@ -509,6 +513,10 @@
 
       .nav-links {
         display: none;
+      }
+
+      #trust .section-header + div {
+        grid-template-columns: 1fr !important;
       }
     }
 
@@ -579,10 +587,10 @@
       <div class="hero-text">
         <div class="hero-badge">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          Available on iPhone & iPad
+          Available on iPhone & iPad · Just $0.99
         </div>
-        <h1>Scripture & Memories, <span>Every Minute</span></h1>
-        <p class="hero-description">A Bible verse for every minute of the day, displayed alongside your favorite family photos and cherished memories. Turn your iPad or iPhone into a meaningful picture frame.</p>
+        <h1>When the Clock Reads 3:16, <span>You See John 3:16</span></h1>
+        <p class="hero-description">1,599 Bible verses synced to every minute of the day, displayed over your own photos. FaithClock turns any iPhone or iPad into a living Scripture frame.</p>
         <div class="cta-group">
           <a href="#" class="btn-primary">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -602,7 +610,24 @@
     <div class="section-header">
       <p class="section-label">How It Works</p>
       <h2>Time Meets Scripture</h2>
-      <p class="section-description">The clock doesn't just tell time—it speaks truth. Each minute is paired with a verse that matches.</p>
+      <p class="section-description">The clock doesn't just tell time — it speaks truth. Each minute is paired with a verse that matches.</p>
+    </div>
+    <div class="steps" style="max-width:800px;margin:0 auto 60px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:center;">
+      <div>
+        <div style="font-size:2rem;margin-bottom:12px;">1</div>
+        <h3 style="font-size:1.1rem;margin-bottom:8px;">Open FaithClock</h3>
+        <p style="color:var(--text-secondary);font-size:0.95rem;">Your chosen photo fills the screen — family moments, nature, travel memories.</p>
+      </div>
+      <div>
+        <div style="font-size:2rem;margin-bottom:12px;">2</div>
+        <h3 style="font-size:1.1rem;margin-bottom:8px;">Check the Time</h3>
+        <p style="color:var(--text-secondary);font-size:0.95rem;">Every minute maps to a matching Bible chapter and verse. 1,599 verses, all day long.</p>
+      </div>
+      <div>
+        <div style="font-size:2rem;margin-bottom:12px;">3</div>
+        <h3 style="font-size:1.1rem;margin-bottom:8px;">Experience the Moment</h3>
+        <p style="color:var(--text-secondary);font-size:0.95rem;">At 3:16, you see John 3:16. At 11:28, Matthew 11:28. Scripture meets you where you are.</p>
+      </div>
     </div>
     <div class="verse-demo">
       <div class="verse-time">3:16</div>
@@ -621,23 +646,23 @@
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">📖</div>
-        <h3>1,500+ Curated Verses</h3>
-        <p>A carefully selected collection from the Berean Standard Bible, mapped to every minute of the day. Fresh scripture with every glance.</p>
+        <h3>1,599 Curated Verses</h3>
+        <p>Every minute of the day is covered. A carefully selected collection from the Berean Standard Bible — fresh Scripture with every glance.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🖼️</div>
         <h3>Your Photos, Your Memories</h3>
-        <p>Choose any album from your photo library. Family portraits, nature shots, or cherished memories as your backdrop.</p>
+        <p>Choose any album from your Photo Library. Family portraits, nature shots, or cherished memories as your backdrop — with 6 smooth transition effects.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">✨</div>
-        <h3>Elegant Glass Interface</h3>
-        <p>Modern design with customizable fonts and sizes. Looks beautiful on any photo, day or night.</p>
+        <h3>Deep Customization</h3>
+        <p>6 verse fonts, 7 clock fonts, 4 text sizes, and configurable photo rotation. Make it yours — it looks beautiful on any photo, day or night.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🔒</div>
         <h3>Private & Offline</h3>
-        <p>No accounts. No tracking. No internet required. Your photos and settings never leave your device.</p>
+        <p>No accounts. No tracking. No ads. No subscriptions. No internet required. Your photos and settings never leave your device.</p>
       </div>
     </div>
   </section>
@@ -663,11 +688,64 @@
     </div>
   </section>
 
+  <!-- Perfect For -->
+  <section class="features" id="perfect-for">
+    <div class="section-header">
+      <p class="section-label">Perfect For</p>
+      <h2>Fits Right Into Your Life</h2>
+      <p class="section-description">However you use it, FaithClock turns idle screens into moments of faith.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🌅</div>
+        <h3>Bedside Inspiration</h3>
+        <p>Wake up to Scripture every morning. A gentle, glowing display that starts your day with purpose.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💼</div>
+        <h3>Home Office Calm</h3>
+        <p>Keep perspective during the workday. A quiet reminder on your desk that there's more than deadlines.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎁</div>
+        <h3>A Meaningful Gift</h3>
+        <p>Pair it with an iPad stand for a thoughtful, personal gift. Pre-load a family album and hand it over ready to go.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Repurpose an Old iPad</h3>
+        <p>That old iPad in the drawer? Give it a second life as a beautiful digital Scripture frame for the kitchen or living room.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Signals -->
+  <section class="how-it-works" id="trust">
+    <div class="section-header">
+      <p class="section-label">Why FaithClock</p>
+      <h2>Simple. Honest. Meaningful.</h2>
+    </div>
+    <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:center;">
+      <div style="padding:32px;">
+        <h3 style="font-size:1.25rem;margin-bottom:12px;">$0.99. That's it.</h3>
+        <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.6;">One purchase. No subscriptions. No ads. No in-app purchases. Ever.</p>
+      </div>
+      <div style="padding:32px;">
+        <h3 style="font-size:1.25rem;margin-bottom:12px;">1,599 Verses, Every Minute Covered</h3>
+        <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.6;">Curated from the Berean Standard Bible. Rotated daily so you always discover something new.</p>
+      </div>
+      <div style="padding:32px;">
+        <h3 style="font-size:1.25rem;margin-bottom:12px;">Zero Data Collected</h3>
+        <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.6;">No accounts. No analytics. Nothing leaves your device. Works entirely offline.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section -->
   <section class="cta-section">
     <div class="cta-box">
-      <h2>Start Your Day with Scripture</h2>
-      <p>Download FaithClock and transform any moment into an opportunity for reflection.</p>
+      <h2>Every Minute Matters</h2>
+      <p>1,599 verses. Your favorite photos. A display that means something. Download FaithClock and turn every glance at the clock into a moment of faith.</p>
       <a href="#" class="btn-primary">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download for iOS
@@ -686,7 +764,7 @@
       <div class="footer-links">
         <a href="privacy.html">Privacy Policy</a>
         <a href="support.html">Support</a>
-        <a href="mailto:andrew@stewardly.ai">Contact</a>
+        <a href="mailto:support@stewardly.ai">Contact</a>
       </div>
       <p class="footer-copyright">© 2026 FaithClock. All rights reserved.</p>
     </div>
