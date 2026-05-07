@@ -796,7 +796,7 @@
       <p class="ornament ornament-pulse">◆ &nbsp;◆ &nbsp;◆</p>
       <p class="kicker">Right now, this minute</p>
       <div class="live-time" id="liveTime" aria-live="polite">3:16<span class="meridiem">PM</span></div>
-      <p class="live-verse" id="liveVerse">"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."</p>
+      <p class="live-verse" id="liveVerse">"For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life."</p>
       <p class="live-ref" id="liveRef">John 3:16 · Berean Standard Bible</p>
       <p class="live-caption">Wait a minute. Watch what happens.</p>
     </div>
@@ -870,9 +870,9 @@
           <div class="caption">
             <div class="ref">Psalm 119:58</div>
             <h4>The morning, before the inbox.</h4>
-            <p>I have sought your face with all my heart; be gracious to me according to your promise. The first thing you see, on a stand by the bed, before anything else has the chance to ask for your attention.</p>
+            <p>I have sought Your face with all my heart; be gracious to me according to Your promise. The first thing you see, on a stand by the bed, before anything else has the chance to ask for your attention.</p>
           </div>
-          <img src="screenshot-lifestyle.jpg" alt="FaithClock on a cozy table with Psalm 119:58 displayed at 2:58, beside a coffee cup and flowers">
+          <img src="screenshot-lifestyle.jpg" alt="FaithClock on a cozy table with Psalm 119:58 displayed at 11:58, beside a coffee cup and flowers">
         </div>
 
         <div class="plate left reveal">
@@ -880,7 +880,7 @@
           <div class="caption">
             <div class="ref">Exodus 3:14</div>
             <h4>A name, on a quiet afternoon.</h4>
-            <p>God said to Moses, &lsquo;I am who I am.&rsquo; Set on the kitchen island, the family album rotating behind it. The clock you've always meant to find time for — turns out it found you.</p>
+            <p>God said to Moses, &lsquo;I AM WHO I AM.&rsquo; Set on the kitchen island, the family album rotating behind it. The clock you've always meant to find time for — turns out it found you.</p>
           </div>
         </div>
       </div>
@@ -898,11 +898,11 @@
       <div class="vignettes">
         <p class="vignette reveal">
           <span class="label">Morning</span>
-          <span class="dropcap">M</span>orning light through the bedroom window. The iPad on the dresser, glowing softly with <em>Psalm 5:3</em>. The first thing read, before the news, before the inbox, before the day decides what it wants from you.
+          <span class="dropcap">F</span>ive-oh-seven in the morning. The iPad on the dresser, glowing softly with <em>1 Peter 5:7</em> — &ldquo;Cast all your anxiety on Him, because He cares for you.&rdquo; The first thing read, before the news, before the inbox, before the day decides what it wants from you.
         </p>
         <p class="vignette reveal">
           <span class="label">Afternoon</span>
-          <span class="dropcap">A</span> difficult Tuesday at the desk. You glance up at four-thirteen — <em>I can do all things through Christ, who strengthens me.</em> Not a notification. Just a verse, the way a verse on a wall used to be there.
+          <span class="dropcap">A</span> difficult Tuesday at the desk. You glance up at four-thirteen — <em>I can do all things through Christ who gives me strength.</em> Not a notification. Just a verse, the way a verse on a wall used to be there.
         </p>
         <p class="vignette reveal">
           <span class="label">A Gift</span>
@@ -954,67 +954,55 @@
 
   <script>
     // ---------- Live verse-clock ----------
-    // A representative selection — for any unmapped minute, falls back gracefully.
-    // The full app contains 1,599 verses from the BSB, one or more per clock minute.
+    // Every entry below is verbatim from the app's verses.json (Berean Standard Bible),
+    // mapped to the same hour:minute slot the app uses. For unmapped minutes we fall back
+    // to other BSB verses that exist in the app. The full app contains 1,599 verses, one
+    // or more per clock minute.
     const verses = {
-      "1:1":   ["Genesis 1:1",        "In the beginning God created the heavens and the earth."],
-      "1:5":   ["James 1:5",          "If any of you lacks wisdom, let him ask of God, who gives generously to all without finding fault, and it will be given to him."],
-      "1:27":  ["Genesis 1:27",       "So God created man in His own image; in the image of God He created him; male and female He created them."],
-      "1:37":  ["Luke 1:37",          "For nothing will be impossible with God."],
-      "2:8":   ["Ephesians 2:8",      "For it is by grace you have been saved, through faith — and this not from yourselves; it is the gift of God."],
-      "2:10":  ["Ephesians 2:10",     "For we are God's workmanship, created in Christ Jesus to do good works, which God prepared in advance for us to do."],
-      "3:5":   ["Proverbs 3:5",       "Trust in the LORD with all your heart, and lean not on your own understanding."],
-      "3:14":  ["Exodus 3:14",        "God said to Moses, 'I AM who I AM.' This is what you are to say to the Israelites: 'I AM has sent me to you.'"],
-      "3:16":  ["John 3:16",          "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life."],
-      "3:23":  ["Romans 3:23",        "For all have sinned and fall short of the glory of God."],
-      "4:6":   ["Philippians 4:6",    "Be anxious for nothing, but in everything, by prayer and petition, with thanksgiving, present your requests to God."],
-      "4:7":   ["Philippians 4:7",    "And the peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus."],
-      "4:8":   ["1 John 4:8",         "Whoever does not love does not know God, because God is love."],
-      "4:13":  ["Philippians 4:13",   "I can do all things through Christ who strengthens me."],
-      "4:19":  ["Philippians 4:19",   "And my God will supply all your needs according to His glorious riches in Christ Jesus."],
-      "5:3":   ["Psalm 5:3",          "In the morning, O LORD, You hear my voice; in the morning I lay my requests before You and wait in expectation."],
-      "5:7":   ["1 Peter 5:7",        "Cast all your anxiety on Him, because He cares for you."],
-      "5:8":   ["Romans 5:8",         "But God demonstrates His own love for us in this: While we were still sinners, Christ died for us."],
-      "5:16":  ["1 Thessalonians 5:16","Rejoice always."],
-      "5:17":  ["2 Corinthians 5:17", "Therefore, if anyone is in Christ, he is a new creation. The old has passed away. Behold, the new has come."],
-      "5:22":  ["Galatians 5:22",     "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness."],
-      "6:33":  ["Matthew 6:33",       "But seek first the kingdom of God and His righteousness, and all these things will be added unto you."],
-      "7:7":   ["Matthew 7:7",        "Ask, and it will be given to you; seek, and you will find; knock, and the door will be opened to you."],
-      "8:28":  ["Romans 8:28",        "And we know that God works all things together for the good of those who love Him, who are called according to His purpose."],
-      "8:31":  ["Romans 8:31",        "What then shall we say in response to these things? If God is for us, who can be against us?"],
-      "8:32":  ["John 8:32",          "Then you will know the truth, and the truth will set you free."],
-      "9:23":  ["Mark 9:23",          "All things are possible to him who believes."],
-      "10:9":  ["Mark 10:9",          "Therefore what God has joined together, let no one separate."],
-      "10:10": ["John 10:10",         "I have come that they may have life, and have it in all its fullness."],
-      "11:1":  ["Hebrews 11:1",       "Now faith is the assurance of what we hope for and the certainty of what we do not see."],
-      "11:28": ["Matthew 11:28",      "Come to Me, all you who are weary and burdened, and I will give you rest."],
-      "12:1":  ["Romans 12:1",        "Therefore, I urge you, brothers, on account of God's mercy, to offer your bodies as a living sacrifice, holy and pleasing to God — this is your spiritual service of worship."],
-      "12:2":  ["Romans 12:2",        "Do not be conformed to this world, but be transformed by the renewing of your mind."],
-      "1:9":   ["1 John 1:9",         "If we confess our sins, He is faithful and just to forgive us our sins and to cleanse us from all unrighteousness."],
-      "2:20":  ["Galatians 2:20",     "I have been crucified with Christ; and it is no longer I who live, but Christ lives in me."],
-      "3:23":  ["Lamentations 3:23",  "His mercies are new every morning; great is Your faithfulness."],
-      "4:31":  ["Isaiah 40:31",       "But those who hope in the LORD will renew their strength; they will soar on wings like eagles; they will run and not grow weary; they will walk and not faint."],
-      "5:11":  ["Hebrews 5:11",       "We have much to say about this, but it is hard to make it clear to you because you no longer try to understand."],
-      "6:9":   ["Matthew 6:9",        "This, then, is how you should pray: 'Our Father in heaven, hallowed be Your name.'"],
-      "7:1":   ["Matthew 7:1",        "Do not judge, or you too will be judged."],
-      "9:6":   ["Isaiah 9:6",         "For unto us a Child is born, unto us a Son is given; and the government will be on His shoulders. And He will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace."],
-      "10:27": ["John 10:27",         "My sheep listen to My voice; I know them, and they follow Me."],
-      "11:25": ["John 11:25",         "I am the resurrection and the life. He who believes in Me will live, even though he dies."],
-      "12:11": ["1 Corinthians 12:11","All these are the work of one and the same Spirit, who distributes them to each one as He determines."],
+      "1:1":   ["Genesis 1:1",         "In the beginning God created the heavens and the earth."],
+      "1:9":   ["Joshua 1:9",          "Have I not commanded you to be strong and courageous? Do not be afraid; do not be discouraged, for the LORD your God is with you wherever you go."],
+      "1:27":  ["Genesis 1:27",        "So God created man in His own image; in the image of God He created him; male and female He created them."],
+      "1:37":  ["Luke 1:37",           "For no word from God will ever fail."],
+      "2:10":  ["Ephesians 2:10",      "For we are God’s workmanship, created in Christ Jesus to do good works, which God prepared in advance as our way of life."],
+      "2:20":  ["Galatians 2:20",      "I have been crucified with Christ, and I no longer live, but Christ lives in me. The life I live in the body, I live by faith in the Son of God, who loved me and gave Himself up for me."],
+      "3:5":   ["Proverbs 3:5",        "Trust in the LORD with all your heart, and lean not on your own understanding;"],
+      "3:14":  ["Exodus 3:14",         "God said to Moses, “I AM WHO I AM. This is what you are to say to the Israelites: ‘I AM has sent me to you.’”"],
+      "3:16":  ["John 3:16",           "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life."],
+      "4:8":   ["1 John 4:8",          "Whoever does not love does not know God, because God is love."],
+      "4:13":  ["Philippians 4:13",    "I can do all things through Christ who gives me strength."],
+      "4:19":  ["Philippians 4:19",    "And my God will supply all your needs according to His glorious riches in Christ Jesus."],
+      "5:7":   ["1 Peter 5:7",         "Cast all your anxiety on Him, because He cares for you."],
+      "5:17":  ["2 Corinthians 5:17",  "Therefore if anyone is in Christ, he is a new creation. The old has passed away. Behold, the new has come!"],
+      "6:33":  ["Matthew 6:33",        "But seek first the kingdom of God and His righteousness, and all these things will be added unto you."],
+      "7:1":   ["Matthew 7:1",         "“Do not judge, or you will be judged.”"],
+      "7:7":   ["Matthew 7:7",         "Ask, and it will be given to you; seek, and you will find; knock, and the door will be opened to you."],
+      "8:28":  ["Romans 8:28",         "And we know that God works all things together for the good of those who love Him, who are called according to His purpose."],
+      "8:31":  ["Romans 8:31",         "What then shall we say in response to these things? If God is for us, who can be against us?"],
+      "9:6":   ["Isaiah 9:6",          "For unto us a child is born, unto us a son is given, and the government will be upon His shoulders. And He will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace."],
+      "9:23":  ["Mark 9:23",           "“If You can?” echoed Jesus. “All things are possible to him who believes!”"],
+      "10:10": ["John 10:10",          "The thief comes only to steal and kill and destroy. I have come that they may have life, and have it in all its fullness."],
+      "10:27": ["John 10:27",          "My sheep listen to My voice; I know them, and they follow Me."],
+      "11:1":  ["Hebrews 11:1",        "Now faith is the assurance of what we hope for and the certainty of what we do not see."],
+      "11:25": ["John 11:25",          "Jesus said to her, “I am the resurrection and the life. Whoever believes in Me will live, even though he dies.”"],
+      "11:28": ["Matthew 11:28",       "Come to Me, all you who are weary and burdened, and I will give you rest."],
+      "11:58": ["Psalm 119:58",        "I have sought Your face with all my heart; be gracious to me according to Your promise."],
+      "12:1":  ["Romans 12:1",         "Therefore I urge you, brothers, on account of God’s mercy, to offer your bodies as living sacrifices, holy and pleasing to God, which is your spiritual service of worship."],
+      "12:2":  ["Romans 12:2",         "Do not be conformed to this world, but be transformed by the renewing of your mind. Then you will be able to test and approve what is the good, pleasing, and perfect will of God."],
     };
 
-    // Fallback verses, rotated by minute, when the exact key isn't in the dictionary.
+    // Fallback verses (BSB, all verbatim from verses.json), rotated by minute when the
+    // exact key isn't in the dictionary above.
     const fallbacks = [
-      ["Psalm 23:1",      "The LORD is my shepherd; I shall not want."],
-      ["Psalm 46:10",     "Be still, and know that I am God."],
-      ["Psalm 27:1",      "The LORD is my light and my salvation — whom shall I fear? The LORD is the stronghold of my life — whom shall I dread?"],
-      ["Psalm 91:1",      "He who dwells in the shelter of the Most High will rest in the shadow of the Almighty."],
-      ["Psalm 119:105",   "Your word is a lamp to my feet and a light to my path."],
-      ["Isaiah 41:10",    "Do not fear, for I am with you; do not be afraid, for I am your God."],
-      ["Jeremiah 29:11",  "For I know the plans I have for you, declares the LORD — plans for welfare and not for evil, to give you a future and a hope."],
-      ["Joshua 1:9",      "Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go."],
-      ["1 Corinthians 13:13","And now these three remain: faith, hope, and love. But the greatest of these is love."],
-      ["Hebrews 13:5",    "I will never leave you nor forsake you."],
+      ["Psalm 23:1",       "The LORD is my shepherd; I shall not want."],
+      ["Psalm 46:10",      "Be still and know that I am God; I will be exalted among the nations, I will be exalted in the earth."],
+      ["Psalm 27:1",       "The LORD is my light and my salvation—whom shall I fear? The LORD is the stronghold of my life—whom shall I dread?"],
+      ["Psalm 91:1",       "He who dwells in the shelter of the Most High will abide in the shadow of the Almighty."],
+      ["Joshua 1:9",       "Have I not commanded you to be strong and courageous? Do not be afraid; do not be discouraged, for the LORD your God is with you wherever you go."],
+      ["John 3:16",        "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life."],
+      ["Romans 8:28",      "And we know that God works all things together for the good of those who love Him, who are called according to His purpose."],
+      ["Hebrews 11:1",     "Now faith is the assurance of what we hope for and the certainty of what we do not see."],
+      ["Matthew 11:28",    "Come to Me, all you who are weary and burdened, and I will give you rest."],
+      ["1 Peter 5:7",      "Cast all your anxiety on Him, because He cares for you."],
     ];
 
     const $time  = document.getElementById('liveTime');
