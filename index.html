@@ -3,700 +3,785 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FaithClock - Bible Verse Clock for iPhone & iPad</title>
+  <title>FaithClock — A Bible Verse Clock for iPhone & iPad</title>
   <meta name="description" content="When the clock reads 3:16, you see John 3:16. 1,599 Bible verses synced to every minute of the day, paired with your own photos. Just $1.99 — no ads, no subscriptions.">
-  <meta name="theme-color" content="#0a0a0b">
+  <meta name="theme-color" content="#0d0a08">
   <link rel="icon" type="image/png" href="app-icon.png">
   <link rel="apple-touch-icon" href="app-icon.png">
   <meta name="apple-itunes-app" content="app-id=6753986757">
-  <!-- Open Graph -->
-  <meta property="og:title" content="FaithClock - Bible Verse Clock for iPhone & iPad">
+  <meta property="og:title" content="FaithClock — A Bible Verse Clock for iPhone & iPad">
   <meta property="og:description" content="When the clock reads 3:16, you see John 3:16. 1,599 Bible verses synced to every minute of the day, paired with your own photos.">
   <meta property="og:image" content="screenshot-promo.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,300..800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #0a0a0b;
-      --bg-secondary: #141416;
-      --bg-card: #1c1c1f;
-      --text-primary: #ffffff;
-      --text-secondary: #9ca3af;
-      --accent: #c9a66b;
-      --accent-light: #e3c99a;
-      --border: rgba(255,255,255,0.08);
+      --ink: #0d0a08;
+      --ink-2: #15110d;
+      --ink-3: #1c1813;
+      --paper: #f3e9d3;
+      --paper-2: #ead9b6;
+      --cream: #f7efde;
+      --gold: #c9a66b;
+      --gold-soft: #e3c99a;
+      --gold-deep: #8c6c3b;
+      --rule: rgba(201,166,107,0.22);
+      --rule-strong: rgba(201,166,107,0.45);
+      --mute: #b09d83;
+      --mute-2: #6f6354;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
+      background: var(--ink);
+      color: var(--cream);
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    /* Navigation */
+    /* Subtle paper grain over the dark — gives it warmth */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.035;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+
+    a { color: inherit; }
+
+    /* ---------- Navigation ---------- */
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 20px 40px;
+      padding: 22px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(10,10,11,0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(13,10,8,0.78);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border-bottom: 1px solid var(--rule);
     }
-
     .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text-primary);
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--cream);
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 144, 'wght' 500;
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
     }
-
-    .nav-logo img {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-    }
-
-    .nav-logo span {
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-    }
-
+    .nav-logo img { width: 30px; height: 30px; border-radius: 6px; }
+    .nav-links { display: flex; gap: 36px; }
     .nav-links a {
-      color: var(--text-secondary);
+      color: var(--mute);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.78rem;
       font-weight: 500;
-      transition: color 0.2s;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--gold-soft); }
+
+    .nav-toggle {
+      display: none; background: none; border: none;
+      cursor: pointer; padding: 8px;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--cream); margin: 5px 0;
+      transition: all 0.3s;
     }
 
-    .nav-links a:hover {
-      color: var(--text-primary);
+    /* ---------- Buttons ---------- */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold);
+      color: #0d0a08;
+      padding: 16px 30px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 14px 30px -12px rgba(201,166,107,0.45);
+    }
+    .btn-primary:hover {
+      background: var(--gold-soft);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--mute);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      padding: 16px 8px;
+      border-bottom: 1px solid var(--rule);
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .btn-secondary:hover {
+      color: var(--gold-soft);
+      border-bottom-color: var(--gold);
     }
 
-    /* Hero Section */
+    /* ---------- Hero (preserved per user request) ---------- */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 120px 40px 80px;
+      padding: 140px 40px 100px;
       position: relative;
     }
-
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(60% 50% at 80% 30%, rgba(201,166,107,0.10), transparent 60%),
+        radial-gradient(50% 60% at 20% 70%, rgba(140,108,59,0.08), transparent 60%);
+      pointer-events: none;
+    }
     .hero-content {
-      max-width: 1200px;
+      position: relative;
+      max-width: 1240px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.05fr 1fr;
       gap: 80px;
       align-items: center;
     }
-
-    .hero-text {
-      max-width: 540px;
-    }
-
+    .hero-text { max-width: 560px; }
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(201, 166, 107, 0.1);
-      border: 1px solid rgba(201, 166, 107, 0.3);
-      padding: 8px 16px;
+      gap: 10px;
+      background: rgba(201,166,107,0.08);
+      border: 1px solid var(--rule);
+      padding: 9px 16px;
       border-radius: 100px;
-      font-size: 0.85rem;
-      color: var(--accent-light);
-      margin-bottom: 24px;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      margin-bottom: 32px;
     }
-
-    .hero-badge svg {
-      width: 16px;
-      height: 16px;
-    }
+    .hero-badge svg { width: 14px; height: 14px; }
 
     h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 3.8rem;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 144, 'wght' 380;
+      font-size: clamp(2.6rem, 6vw, 4.6rem);
       font-weight: 400;
-      line-height: 1.1;
-      margin-bottom: 24px;
+      line-height: 1.04;
+      margin-bottom: 28px;
       letter-spacing: -0.02em;
     }
-
-    h1 span {
-      color: var(--accent);
+    h1 em {
+      color: var(--gold-soft);
+      font-style: italic;
+      font-variation-settings: 'opsz' 144, 'wght' 400;
     }
 
     .hero-description {
-      font-size: 1.2rem;
-      color: var(--text-secondary);
-      margin-bottom: 40px;
+      font-size: 1.08rem;
+      color: var(--mute);
+      margin-bottom: 44px;
       line-height: 1.7;
+      max-width: 480px;
     }
-
     .cta-group {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
+      display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
     }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--accent);
-      color: #000;
-      padding: 16px 32px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.2s;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-light);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-secondary);
-      padding: 16px 24px;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
-      transition: color 0.2s;
-    }
-
-    .btn-secondary:hover {
-      color: var(--text-primary);
-    }
-
-    .hero-image {
-      position: relative;
-    }
-
+    .hero-image { position: relative; }
     .hero-image img {
       width: 100%;
-      max-width: 500px;
-      border-radius: 24px;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+      max-width: 520px;
+      border-radius: 4px;
+      box-shadow: 0 50px 120px -30px rgba(0,0,0,0.7),
+                  0 0 0 1px rgba(255,255,255,0.04);
     }
-
     .hero-image::before {
       content: '';
       position: absolute;
-      top: -20px;
-      right: -20px;
-      bottom: -20px;
-      left: -20px;
-      background: linear-gradient(135deg, rgba(201,166,107,0.1) 0%, transparent 50%);
-      border-radius: 32px;
+      top: -30px; right: -30px; bottom: -30px; left: -30px;
+      background: linear-gradient(135deg, rgba(201,166,107,0.12) 0%, transparent 55%);
       z-index: -1;
     }
 
-    /* How It Works */
-    .how-it-works {
-      padding: 120px 40px;
-      background: var(--bg-secondary);
-    }
-
-    .section-header {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 80px;
-    }
-
-    .section-label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
-    }
-
-    h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2.8rem;
-      font-weight: 400;
-      margin-bottom: 20px;
-    }
-
-    .section-description {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-    }
-
-    .verse-demo {
-      max-width: 600px;
-      margin: 0 auto;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 60px;
-      text-align: center;
-    }
-
-    .verse-time {
-      font-family: 'DM Sans', monospace;
-      font-size: 4rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 32px;
-      letter-spacing: 0.05em;
-    }
-
-    .verse-content {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-      color: var(--text-primary);
-    }
-
-    .verse-reference {
-      color: var(--text-secondary);
-      font-size: 1rem;
-    }
-
-    /* Features */
-    .features {
-      padding: 120px 40px;
-    }
-
-    .features-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-
-    .feature-card:hover {
-      border-color: rgba(201,166,107,0.3);
-      transform: translateY(-4px);
-    }
-
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      background: rgba(201,166,107,0.1);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 24px;
-    }
-
-    .feature-card h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .feature-card p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    /* Gallery */
-    .gallery {
-      padding: 120px 40px;
-      background: var(--bg-secondary);
-    }
-
-    .gallery-grid {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-    }
-
-    .gallery-item {
+    /* ---------- Living Clock — the centerpiece ---------- */
+    .living {
+      padding: 160px 40px 140px;
       position: relative;
-      border-radius: 20px;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      background: linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+      text-align: center;
       overflow: hidden;
     }
-
-    .gallery-item.featured {
-      grid-column: span 2;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      display: block;
-      transition: transform 0.5s;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.03);
-    }
-
-    .gallery-caption {
+    .living::before, .living::after {
+      content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 32px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.8));
-      color: var(--text-primary);
+      width: 1px; height: 70px;
+      background: linear-gradient(var(--gold), transparent);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .living::before { top: 0; }
+    .living::after  { bottom: 0; transform: translateX(-50%) scaleY(-1); }
+
+    .living-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .ornament {
+      font-family: 'Fraunces', serif;
+      color: var(--gold);
+      font-size: 1.4rem;
+      letter-spacing: 0.6em;
+      margin-bottom: 28px;
+      opacity: 0.9;
+    }
+    .kicker {
+      font-size: 0.74rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
       font-weight: 500;
     }
-
-    /* CTA Section */
-    .cta-section {
-      padding: 120px 40px;
-      text-align: center;
+    .live-time {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 144, 'wght' 320;
+      font-size: clamp(4.5rem, 14vw, 9.5rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--cream);
+      margin-bottom: 14px;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+    .live-time .meridiem {
+      font-size: 0.22em;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      font-variation-settings: 'opsz' 30, 'wght' 500;
+      transform: translateY(-0.6em);
+    }
+    .live-verse {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 60, 'wght' 360;
+      font-style: italic;
+      font-size: clamp(1.15rem, 1.9vw, 1.55rem);
+      line-height: 1.55;
+      color: var(--cream);
+      max-width: 640px;
+      margin: 24px auto 18px;
+      transition: opacity 0.5s ease;
+    }
+    .live-ref {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      margin-bottom: 56px;
+      transition: opacity 0.5s ease;
+    }
+    .live-caption {
+      font-size: 0.84rem;
+      color: var(--mute-2);
+      letter-spacing: 0.08em;
     }
 
-    .cta-box {
-      max-width: 700px;
-      margin: 0 auto;
-      background: linear-gradient(135deg, rgba(201,166,107,0.15) 0%, rgba(201,166,107,0.05) 100%);
-      border: 1px solid rgba(201,166,107,0.2);
-      border-radius: 32px;
-      padding: 80px 60px;
+    /* ---------- Editorial Notes ---------- */
+    .editorial {
+      padding: 160px 40px 140px;
+      background: var(--ink);
     }
-
-    .cta-box h2 {
-      margin-bottom: 16px;
-    }
-
-    .cta-box p {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      margin-bottom: 40px;
-    }
-
-    .price-tag {
-      display: inline-block;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-top: 16px;
-    }
-
-    /* Footer */
-    footer {
-      padding: 60px 40px;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-content {
+    .editorial-inner {
       max-width: 1100px;
       margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
+    }
+    .editorial-head {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 100px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .editorial-head .kicker { margin-bottom: 0; }
+    .section-h {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 144, 'wght' 360;
+      font-size: clamp(1.9rem, 4.4vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      max-width: 18ch;
+    }
+
+    .essays {
+      list-style: none;
+      counter-reset: essay;
+      display: grid;
+      gap: 80px;
+    }
+    .essay {
+      display: grid;
+      grid-template-columns: 110px 1fr 1.2fr;
+      gap: 40px;
+      align-items: start;
+      padding-top: 36px;
+      border-top: 1px solid var(--rule);
+      counter-increment: essay;
+    }
+    .essay .num {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 60, 'wght' 380;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+    }
+    .essay .num::before {
+      content: 'Nº ';
+      color: var(--gold-deep);
+    }
+    .essay h3 {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 80, 'wght' 420;
+      font-size: clamp(1.35rem, 1.9vw, 1.7rem);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--cream);
+      max-width: 22ch;
+    }
+    .essay p {
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: var(--mute);
+      max-width: 56ch;
+    }
+    .essay p strong {
+      color: var(--gold-soft);
+      font-weight: 500;
+    }
+    .essay .meta {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+    }
+
+    /* ---------- Gallery (cinematic) ---------- */
+    .gallery {
+      padding: 0;
+      background: var(--ink-2);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .gallery-strip {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 140px 40px 120px;
+    }
+    .gallery-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 80px;
+    }
+    .gallery-head p {
+      max-width: 44ch;
+      color: var(--mute);
+      font-size: 1.02rem;
+      line-height: 1.7;
+      justify-self: end;
+    }
+    .gallery-stack {
+      display: grid;
+      gap: 90px;
+    }
+    .plate {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
       align-items: center;
-      flex-wrap: wrap;
+    }
+    .plate.right { grid-template-columns: 1fr 1.2fr; }
+    .plate.left  { grid-template-columns: 1.2fr 1fr; direction: rtl; }
+    .plate.left > * { direction: ltr; }
+    .plate img {
+      width: 100%;
+      display: block;
+      border-radius: 3px;
+      box-shadow: 0 30px 80px -28px rgba(0,0,0,0.7),
+                  0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .plate .caption {
+      padding: 0 8px;
+    }
+    .plate .caption .ref {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 60, 'wght' 360;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--gold-soft);
+      margin-bottom: 14px;
+    }
+    .plate .caption h4 {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 144, 'wght' 380;
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      color: var(--cream);
+    }
+    .plate .caption p {
+      color: var(--mute);
+      max-width: 38ch;
+      line-height: 1.7;
+    }
+    .plate.full {
+      grid-template-columns: 1fr;
+      direction: ltr;
+    }
+    .plate.full img { max-height: 78vh; object-fit: cover; }
+
+    /* ---------- Cream "Paper" section ---------- */
+    .paper {
+      background: var(--paper);
+      color: var(--ink);
+      padding: 160px 40px 150px;
+      position: relative;
+    }
+    .paper::after {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+    .paper-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .paper .kicker { color: var(--gold-deep); }
+    .paper .section-h {
+      color: var(--ink);
+      max-width: 24ch;
+      margin: 0 auto 90px;
+      text-align: center;
+    }
+    .paper .editorial-head {
+      grid-template-columns: 1fr;
+      text-align: center;
       gap: 24px;
-    }
-
-    .footer-logo {
-      display: flex;
+      border-bottom-color: rgba(13,10,8,0.16);
       align-items: center;
-      gap: 12px;
     }
-
-    .footer-logo img {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
+    .vignettes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 60px;
     }
-
-    .footer-logo span {
+    .vignette {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 24, 'wght' 380;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--ink-2);
+    }
+    .vignette em {
+      font-style: italic;
+      color: var(--gold-deep);
+    }
+    .dropcap {
+      float: left;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 144, 'wght' 360;
+      font-size: 4.2rem;
+      line-height: 0.86;
+      padding-right: 10px;
+      padding-top: 6px;
+      color: var(--gold-deep);
+    }
+    .vignette .label {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin-bottom: 18px;
       font-weight: 600;
     }
 
-    .footer-links {
-      display: flex;
-      gap: 32px;
-    }
-
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: var(--text-primary);
-    }
-
-    .footer-copyright {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-    }
-
-    /* Steps */
-    .steps {
-      max-width: 800px;
-      margin: 0 auto 60px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+    /* ---------- Closing benediction / CTA ---------- */
+    .closing {
+      padding: 180px 40px 160px;
       text-align: center;
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
     }
-
-    .step-number {
-      font-size: 2rem;
-      margin-bottom: 12px;
+    .closing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(60% 50% at 50% 30%, rgba(201,166,107,0.10), transparent 70%);
+      pointer-events: none;
     }
-
-    .steps h3 {
+    .closing-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .asterism {
+      font-family: 'Fraunces', serif;
+      color: var(--gold);
+      font-size: 1.4rem;
+      letter-spacing: 0.4em;
+      margin-bottom: 36px;
+    }
+    .closing h2 {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 144, 'wght' 340;
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+      color: var(--cream);
+    }
+    .closing h2 em {
+      font-style: italic;
+      color: var(--gold-soft);
+      font-variation-settings: 'opsz' 144, 'wght' 360;
+    }
+    .closing .lede {
       font-size: 1.1rem;
-      margin-bottom: 8px;
+      color: var(--mute);
+      max-width: 38ch;
+      margin: 0 auto 50px;
+      line-height: 1.65;
     }
-
-    .steps p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
+    .closing .conditions {
+      margin-top: 36px;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mute-2);
     }
+    .closing .conditions span {
+      display: inline-block;
+      padding: 0 14px;
+      border-right: 1px solid var(--rule);
+    }
+    .closing .conditions span:last-child { border-right: none; }
 
-    /* Trust Grid */
-    .trust-grid {
-      max-width: 900px;
+    /* ---------- Footer ---------- */
+    footer {
+      padding: 60px 40px 50px;
+      border-top: 1px solid var(--rule);
+      background: var(--ink);
+    }
+    .footer-content {
+      max-width: 1240px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 144, 'wght' 460;
+      font-size: 1rem;
+    }
+    .footer-logo img { width: 26px; height: 26px; border-radius: 6px; }
+    .footer-links {
+      display: flex; gap: 28px; justify-content: center; flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--mute);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold-soft); }
+    .footer-meta {
+      text-align: right;
+      color: var(--mute-2);
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+    }
+    .colophon {
+      max-width: 1240px;
+      margin: 50px auto 0;
+      padding-top: 28px;
+      border-top: 1px solid var(--rule);
+      font-size: 0.72rem;
+      color: var(--mute-2);
+      line-height: 1.7;
+      letter-spacing: 0.04em;
       text-align: center;
+      font-style: italic;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 14, 'wght' 360;
     }
 
-    .trust-grid > div {
-      padding: 32px;
+    /* ---------- Reveal animation ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* Hero entrance — staggered, no observer needed */
+    .hero-badge, h1, .hero-description, .cta-group, .hero-image {
+      animation: rise 1.1s cubic-bezier(.2,.7,.2,1) backwards;
+    }
+    .hero-badge { animation-delay: 0.05s; }
+    h1 { animation-delay: 0.18s; }
+    .hero-description { animation-delay: 0.32s; }
+    .cta-group { animation-delay: 0.46s; }
+    .hero-image { animation-delay: 0.20s; animation-duration: 1.4s; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: none; }
     }
 
-    .trust-grid h3 {
-      font-size: 1.25rem;
-      margin-bottom: 12px;
+    .ornament-pulse { animation: breathe 4.5s ease-in-out infinite; }
+    @keyframes breathe {
+      0%,100% { opacity: 0.55; }
+      50%     { opacity: 0.95; }
     }
 
-    .trust-grid p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
+    /* Verse swap animation */
+    .swap-out { opacity: 0 !important; }
 
-    /* Hamburger Menu */
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1000px) {
+      .editorial-head { grid-template-columns: 1fr; gap: 24px; }
+      .essay { grid-template-columns: 60px 1fr; gap: 24px; }
+      .essay h3 { grid-column: 2; }
+      .essay p, .essay .meta { grid-column: 2; }
+      .gallery-head { grid-template-columns: 1fr; gap: 20px; }
+      .gallery-head p { justify-self: start; }
+      .plate, .plate.right, .plate.left { grid-template-columns: 1fr; gap: 28px; direction: ltr; }
+      .vignettes { grid-template-columns: 1fr; gap: 40px; }
+      .footer-content { grid-template-columns: 1fr; text-align: center; gap: 24px; }
+      .footer-meta { text-align: center; }
     }
-
-    .nav-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      margin: 5px 0;
-      transition: all 0.3s;
-    }
-
-    /* Responsive */
     @media (max-width: 900px) {
-      .nav-toggle {
-        display: block;
-      }
-
+      .nav-toggle { display: block; }
       .nav-links {
         display: none;
         position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
+        top: 100%; left: 0; right: 0;
         flex-direction: column;
-        background: rgba(10,10,11,0.95);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        padding: 16px 40px 24px;
-        gap: 16px;
-        border-bottom: 1px solid var(--border);
+        background: rgba(13,10,8,0.96);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        padding: 18px 40px 26px;
+        gap: 18px;
+        border-bottom: 1px solid var(--rule);
       }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .steps,
-      .trust-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-content {
-        grid-template-columns: 1fr;
-        gap: 60px;
-        text-align: center;
-      }
-
-      .hero-text {
-        max-width: 100%;
-      }
-
-      .cta-group {
-        justify-content: center;
-      }
-
-      .hero-image {
-        order: -1;
-      }
-
-      .hero-image img {
-        max-width: 400px;
-        margin: 0 auto;
-        display: block;
-      }
-
-      h1 {
-        font-size: 2.8rem;
-      }
-
-      h2 {
-        font-size: 2.2rem;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-item.featured {
-        grid-column: span 1;
-      }
-
+      .nav-links.open { display: flex; }
+      .hero-content { grid-template-columns: 1fr; gap: 60px; text-align: center; }
+      .hero-text { max-width: 100%; }
+      .hero-description { margin-left: auto; margin-right: auto; }
+      .cta-group { justify-content: center; }
+      .hero-image { order: -1; }
+      .hero-image img { max-width: 420px; margin: 0 auto; display: block; }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 16px 22px; }
+      .hero { padding: 110px 22px 70px; }
+      .living, .editorial, .closing { padding: 110px 22px 100px; }
+      .gallery-strip { padding: 100px 22px 90px; }
+      .paper { padding: 120px 22px 110px; }
+      .closing .conditions span { display: block; padding: 4px 0; border-right: none; }
+      .essay { grid-template-columns: 1fr; gap: 12px; }
+      .essay .num { color: var(--gold); }
+      .essay h3 { grid-column: 1; }
+      .essay p, .essay .meta { grid-column: 1; }
     }
 
-    @media (max-width: 600px) {
-      nav {
-        padding: 16px 24px;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
       }
-
-      .hero {
-        padding: 100px 24px 60px;
-      }
-
-      h1 {
-        font-size: 2.2rem;
-      }
-
-      .hero-description {
-        font-size: 1rem;
-      }
-
-      .how-it-works,
-      .features,
-      .gallery,
-      .cta-section {
-        padding: 80px 24px;
-      }
-
-      .verse-demo {
-        padding: 40px 24px;
-      }
-
-      .verse-time {
-        font-size: 2.5rem;
-      }
-
-      .verse-content {
-        font-size: 1.2rem;
-      }
-
-      .cta-box {
-        padding: 48px 24px;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-      }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
+
   <!-- Navigation -->
   <nav>
-    <a href="#" class="nav-logo">
-      <img src="app-icon.png" alt="FaithClock">
+    <a href="#top" class="nav-logo">
+      <img src="app-icon.png" alt="">
       <span>FaithClock</span>
     </a>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
     <div class="nav-links">
-      <a href="#features">Features</a>
+      <a href="#now">Live</a>
+      <a href="#notes">Notes</a>
       <a href="#gallery">Gallery</a>
       <a href="support.html">Support</a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
+  <!-- Hero — preserved per user direction -->
+  <section class="hero" id="top">
     <div class="hero-content">
       <div class="hero-text">
         <div class="hero-badge">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          Available on iPhone & iPad · Just $1.99
+          On the App Store · iPhone &amp; iPad · $1.99
         </div>
-        <h1>When the Clock Reads 3:16, <span>You See John 3:16</span></h1>
-        <p class="hero-description">1,599 Bible verses synced to every minute of the day, displayed over your own photos. FaithClock turns any iPhone or iPad into a living Scripture frame.</p>
+        <h1>When the clock reads 3:16, <em>you see John 3:16.</em></h1>
+        <p class="hero-description">1,599 verses from the Berean Standard Bible, synced to every minute of the day, set against your own photos. A small, quiet machine for daily devotion.</p>
         <div class="cta-group">
           <a href="https://apps.apple.com/app/faith-clock-bible-clock/id6753986757" class="btn-primary">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            Download for iOS
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download on the App Store
           </a>
-          <a href="#features" class="btn-secondary">Learn more &#8594;</a>
+          <a href="#now" class="btn-secondary">See it in action &rarr;</a>
         </div>
       </div>
       <div class="hero-image">
@@ -705,152 +790,145 @@
     </div>
   </section>
 
-  <!-- How It Works -->
-  <section class="how-it-works" id="how">
-    <div class="section-header">
-      <p class="section-label">How It Works</p>
-      <h2>Time Meets Scripture</h2>
-      <p class="section-description">The clock doesn't just tell time — it speaks truth. Each minute is paired with a verse that matches.</p>
-    </div>
-    <div class="steps">
-      <div>
-        <div class="step-number">1</div>
-        <h3>Open FaithClock</h3>
-        <p>Your chosen photo fills the screen — family moments, nature, travel memories.</p>
-      </div>
-      <div>
-        <div class="step-number">2</div>
-        <h3>Check the Time</h3>
-        <p>Every minute maps to a matching Bible chapter and verse. 1,599 verses, all day long.</p>
-      </div>
-      <div>
-        <div class="step-number">3</div>
-        <h3>Experience the Moment</h3>
-        <p>At 3:16, you see John 3:16. At 11:28, Matthew 11:28. Scripture meets you where you are.</p>
-      </div>
-    </div>
-    <div class="verse-demo">
-      <div class="verse-time">3:16</div>
-      <p class="verse-content">"For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life."</p>
-      <p class="verse-reference">— John 3:16 BSB</p>
+  <!-- Living Clock — the centerpiece -->
+  <section class="living" id="now">
+    <div class="living-inner">
+      <p class="ornament ornament-pulse">◆ &nbsp;◆ &nbsp;◆</p>
+      <p class="kicker">Right now, this minute</p>
+      <div class="live-time" id="liveTime" aria-live="polite">3:16<span class="meridiem">PM</span></div>
+      <p class="live-verse" id="liveVerse">"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."</p>
+      <p class="live-ref" id="liveRef">John 3:16 · Berean Standard Bible</p>
+      <p class="live-caption">Wait a minute. Watch what happens.</p>
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="features" id="features">
-    <div class="section-header">
-      <p class="section-label">Features</p>
-      <h2>Thoughtfully Designed</h2>
-      <p class="section-description">Every detail crafted to bring faith and beauty into your daily life.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">📖</div>
-        <h3>1,599 Curated Verses</h3>
-        <p>Every minute of the day is covered. A carefully selected collection from the Berean Standard Bible — fresh Scripture with every glance.</p>
+  <!-- Editorial: Field Notes -->
+  <section class="editorial" id="notes">
+    <div class="editorial-inner">
+      <div class="editorial-head reveal">
+        <p class="kicker">Field notes</p>
+        <h2 class="section-h">A small machine for daily devotion.</h2>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🖼️</div>
-        <h3>Your Photos, Your Memories</h3>
-        <p>Choose any album from your Photo Library. Family portraits, nature shots, or cherished memories as your backdrop — with 6 smooth transition effects.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">✨</div>
-        <h3>Deep Customization</h3>
-        <p>6 verse fonts, 7 clock fonts, 4 text sizes, and configurable photo rotation. Make it yours — it looks beautiful on any photo, day or night.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <h3>Private & Offline</h3>
-        <p>No accounts. No tracking. No ads. No subscriptions. No internet required. Your photos and settings never leave your device.</p>
-      </div>
+
+      <ol class="essays">
+        <li class="essay reveal">
+          <span class="num">01</span>
+          <h3>One verse, every minute, all day.</h3>
+          <div>
+            <p>FaithClock holds <strong>1,599 verses</strong> from the Berean Standard Bible. Each minute of the twelve-hour clock points to a chapter and verse — at <em>3:16</em>, John 3:16. At <em>11:28</em>, Matthew 11:28. There is no minute without Scripture. When several passages match a single moment, the clock rotates them, day by day, so you keep finding new ones.</p>
+            <span class="meta">Berean Standard Bible · Public Domain</span>
+          </div>
+        </li>
+
+        <li class="essay reveal">
+          <span class="num">02</span>
+          <h3>Your photos, set as the page.</h3>
+          <div>
+            <p>Pick any album from your iPhone or iPad — family pictures, the mountains, kids on the swings. They become the canvas the verse rests on. Six gentle transitions between them; rotate as slow as every ten minutes or as quick as every one. Nothing leaves your device.</p>
+            <span class="meta">Photos via PhotoKit · Local-only</span>
+          </div>
+        </li>
+
+        <li class="essay reveal">
+          <span class="num">03</span>
+          <h3>Designed to be looked at.</h3>
+          <div>
+            <p>Six serifed fonts for the verse. Seven for the clock — including a real seven-segment display lifted straight from a 1970s digital readout. Four sizes. It looks at home on a kitchen counter or a bedside table; on a glass-front iPad mini in the morning or a 13-inch iPad Pro in the afternoon.</p>
+            <span class="meta">Typography · Cross-iPad layout</span>
+          </div>
+        </li>
+
+        <li class="essay reveal">
+          <span class="num">04</span>
+          <h3>Yours alone. No exceptions.</h3>
+          <div>
+            <p>No accounts. No analytics. No internet required. No advertising, ever. No in-app purchases, ever. One purchase — <strong>$1.99</strong> — and the only data that leaves your device is the dollar you spend to download it.</p>
+            <span class="meta">Privacy · Offline-first</span>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
   <!-- Gallery -->
   <section class="gallery" id="gallery">
-    <div class="section-header">
-      <p class="section-label">Gallery</p>
-      <h2>See It in Action</h2>
-      <p class="section-description">Beautiful on your nightstand, desk, or anywhere you need a moment of reflection.</p>
-    </div>
-    <div class="gallery-grid">
-      <div class="gallery-item featured no-caption">
-        <img src="screenshot-promo.jpg" alt="FaithClock on iPad displaying John 3:16 over a photo of children on swings, with bokeh lights in the background" loading="lazy">
+    <div class="gallery-strip">
+      <div class="gallery-head reveal">
+        <div>
+          <p class="kicker">Plates</p>
+          <h2 class="section-h">In rooms it lives in.</h2>
+        </div>
+        <p>FaithClock is meant to sit somewhere — by the bed, on the desk, in the kitchen window. A few quiet evenings of how it might look in yours.</p>
       </div>
-      <div class="gallery-item no-caption">
-        <img src="screenshot-app.jpg" alt="FaithClock on iPad showing Exodus 3:14 over a family beach photo, on a wooden table with coffee and flowers" loading="lazy">
-      </div>
-      <div class="gallery-item">
-        <img src="screenshot-lifestyle.jpg" alt="FaithClock on an iPad on a cozy table with a Psalm 119:58 verse — perfect as a bedside or living room display" loading="lazy">
-        <div class="gallery-caption">Perfect as a bedside or living room display</div>
+
+      <div class="gallery-stack">
+        <div class="plate full reveal">
+          <img src="screenshot-promo.jpg" alt="FaithClock on iPad displaying John 3:16 over a photo of children on swings, with bokeh lights in the background">
+        </div>
+
+        <div class="plate right reveal">
+          <div class="caption">
+            <div class="ref">Psalm 119:58</div>
+            <h4>The morning, before the inbox.</h4>
+            <p>I have sought your face with all my heart; be gracious to me according to your promise. The first thing you see, on a stand by the bed, before anything else has the chance to ask for your attention.</p>
+          </div>
+          <img src="screenshot-lifestyle.jpg" alt="FaithClock on a cozy table with Psalm 119:58 displayed at 2:58, beside a coffee cup and flowers">
+        </div>
+
+        <div class="plate left reveal">
+          <img src="screenshot-app.jpg" alt="FaithClock on iPad showing Exodus 3:14 over a family beach photo, on a wooden table with coffee and flowers">
+          <div class="caption">
+            <div class="ref">Exodus 3:14</div>
+            <h4>A name, on a quiet afternoon.</h4>
+            <p>God said to Moses, &lsquo;I am who I am.&rsquo; Set on the kitchen island, the family album rotating behind it. The clock you've always meant to find time for — turns out it found you.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Perfect For -->
-  <section class="features" id="perfect-for">
-    <div class="section-header">
-      <p class="section-label">Perfect For</p>
-      <h2>Fits Right Into Your Life</h2>
-      <p class="section-description">However you use it, FaithClock turns idle screens into moments of faith.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🌅</div>
-        <h3>Bedside Inspiration</h3>
-        <p>Wake up to Scripture every morning. A gentle, glowing display that starts your day with purpose.</p>
+  <!-- Paper section: vignettes -->
+  <section class="paper">
+    <div class="paper-inner">
+      <div class="editorial-head reveal">
+        <p class="kicker">A few places we've found it</p>
+        <h2 class="section-h">By the bedside. On the desk. In the kitchen window.</h2>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">💼</div>
-        <h3>Home Office Calm</h3>
-        <p>Keep perspective during the workday. A quiet reminder on your desk that there's more than deadlines.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🎁</div>
-        <h3>A Meaningful Gift</h3>
-        <p>Pair it with an iPad stand for a thoughtful, personal gift. Pre-load a family album and hand it over ready to go.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📱</div>
-        <h3>Repurpose an Old iPad</h3>
-        <p>That old iPad in the drawer? Give it a second life as a beautiful digital Scripture frame for the kitchen or living room.</p>
+
+      <div class="vignettes">
+        <p class="vignette reveal">
+          <span class="label">Morning</span>
+          <span class="dropcap">M</span>orning light through the bedroom window. The iPad on the dresser, glowing softly with <em>Psalm 5:3</em>. The first thing read, before the news, before the inbox, before the day decides what it wants from you.
+        </p>
+        <p class="vignette reveal">
+          <span class="label">Afternoon</span>
+          <span class="dropcap">A</span> difficult Tuesday at the desk. You glance up at four-thirteen — <em>I can do all things through Christ, who strengthens me.</em> Not a notification. Just a verse, the way a verse on a wall used to be there.
+        </p>
+        <p class="vignette reveal">
+          <span class="label">A Gift</span>
+          <span class="dropcap">A</span> spare iPad becomes a gift. Pre-load a family album, set it on a stand, hand it to someone you love. The old device finds the only purpose it ever needed.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Trust Signals -->
-  <section class="how-it-works" id="trust">
-    <div class="section-header">
-      <p class="section-label">Why FaithClock</p>
-      <h2>Simple. Honest. Meaningful.</h2>
-    </div>
-    <div class="trust-grid">
-      <div>
-        <h3>$1.99. That's it.</h3>
-        <p>One purchase. No subscriptions. No ads. No in-app purchases. Ever.</p>
-      </div>
-      <div>
-        <h3>1,599 Verses, Every Minute Covered</h3>
-        <p>Curated from the Berean Standard Bible. Rotated daily so you always discover something new.</p>
-      </div>
-      <div>
-        <h3>Zero Data Collected</h3>
-        <p>No accounts. No analytics. Nothing leaves your device. Works entirely offline.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="cta-box">
-      <h2>Every Minute Matters</h2>
-      <p>1,599 verses. Your favorite photos. A display that means something. Download FaithClock and turn every glance at the clock into a moment of faith.</p>
+  <!-- Closing benediction / CTA -->
+  <section class="closing">
+    <div class="closing-inner">
+      <p class="asterism">⁂</p>
+      <h2>Every glance, <em>a verse.</em></h2>
+      <p class="lede">1,599 of them, paired to your photos, sitting somewhere in your home. One purchase. Forever yours.</p>
       <a href="https://apps.apple.com/app/faith-clock-bible-clock/id6753986757" class="btn-primary">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download for iOS
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the App Store
       </a>
-      <p class="price-tag">Just $1.99 · One-time purchase · No subscriptions</p>
+      <p class="conditions">
+        <span>$1.99 once</span>
+        <span>No subscriptions</span>
+        <span>No accounts</span>
+        <span>No ads</span>
+        <span>Offline</span>
+      </p>
     </div>
   </section>
 
@@ -858,17 +936,143 @@
   <footer>
     <div class="footer-content">
       <div class="footer-logo">
-        <img src="app-icon.png" alt="FaithClock">
+        <img src="app-icon.png" alt="">
         <span>FaithClock</span>
       </div>
       <div class="footer-links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
         <a href="support.html">Support</a>
         <a href="mailto:support@stewardly.ai">Contact</a>
       </div>
-      <p class="footer-copyright">© 2026 FaithClock. All rights reserved.</p>
+      <p class="footer-meta">© 2026 FaithClock</p>
     </div>
+    <p class="colophon">
+      Scripture: Berean Standard Bible. The BSB text has been dedicated to the public domain. Set in Fraunces &amp; DM Sans.
+    </p>
   </footer>
+
+  <script>
+    // ---------- Live verse-clock ----------
+    // A representative selection — for any unmapped minute, falls back gracefully.
+    // The full app contains 1,599 verses from the BSB, one or more per clock minute.
+    const verses = {
+      "1:1":   ["Genesis 1:1",        "In the beginning God created the heavens and the earth."],
+      "1:5":   ["James 1:5",          "If any of you lacks wisdom, let him ask of God, who gives generously to all without finding fault, and it will be given to him."],
+      "1:27":  ["Genesis 1:27",       "So God created man in His own image; in the image of God He created him; male and female He created them."],
+      "1:37":  ["Luke 1:37",          "For nothing will be impossible with God."],
+      "2:8":   ["Ephesians 2:8",      "For it is by grace you have been saved, through faith — and this not from yourselves; it is the gift of God."],
+      "2:10":  ["Ephesians 2:10",     "For we are God's workmanship, created in Christ Jesus to do good works, which God prepared in advance for us to do."],
+      "3:5":   ["Proverbs 3:5",       "Trust in the LORD with all your heart, and lean not on your own understanding."],
+      "3:14":  ["Exodus 3:14",        "God said to Moses, 'I AM who I AM.' This is what you are to say to the Israelites: 'I AM has sent me to you.'"],
+      "3:16":  ["John 3:16",          "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life."],
+      "3:23":  ["Romans 3:23",        "For all have sinned and fall short of the glory of God."],
+      "4:6":   ["Philippians 4:6",    "Be anxious for nothing, but in everything, by prayer and petition, with thanksgiving, present your requests to God."],
+      "4:7":   ["Philippians 4:7",    "And the peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus."],
+      "4:8":   ["1 John 4:8",         "Whoever does not love does not know God, because God is love."],
+      "4:13":  ["Philippians 4:13",   "I can do all things through Christ who strengthens me."],
+      "4:19":  ["Philippians 4:19",   "And my God will supply all your needs according to His glorious riches in Christ Jesus."],
+      "5:3":   ["Psalm 5:3",          "In the morning, O LORD, You hear my voice; in the morning I lay my requests before You and wait in expectation."],
+      "5:7":   ["1 Peter 5:7",        "Cast all your anxiety on Him, because He cares for you."],
+      "5:8":   ["Romans 5:8",         "But God demonstrates His own love for us in this: While we were still sinners, Christ died for us."],
+      "5:16":  ["1 Thessalonians 5:16","Rejoice always."],
+      "5:17":  ["2 Corinthians 5:17", "Therefore, if anyone is in Christ, he is a new creation. The old has passed away. Behold, the new has come."],
+      "5:22":  ["Galatians 5:22",     "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness."],
+      "6:33":  ["Matthew 6:33",       "But seek first the kingdom of God and His righteousness, and all these things will be added unto you."],
+      "7:7":   ["Matthew 7:7",        "Ask, and it will be given to you; seek, and you will find; knock, and the door will be opened to you."],
+      "8:28":  ["Romans 8:28",        "And we know that God works all things together for the good of those who love Him, who are called according to His purpose."],
+      "8:31":  ["Romans 8:31",        "What then shall we say in response to these things? If God is for us, who can be against us?"],
+      "8:32":  ["John 8:32",          "Then you will know the truth, and the truth will set you free."],
+      "9:23":  ["Mark 9:23",          "All things are possible to him who believes."],
+      "10:9":  ["Mark 10:9",          "Therefore what God has joined together, let no one separate."],
+      "10:10": ["John 10:10",         "I have come that they may have life, and have it in all its fullness."],
+      "11:1":  ["Hebrews 11:1",       "Now faith is the assurance of what we hope for and the certainty of what we do not see."],
+      "11:28": ["Matthew 11:28",      "Come to Me, all you who are weary and burdened, and I will give you rest."],
+      "12:1":  ["Romans 12:1",        "Therefore, I urge you, brothers, on account of God's mercy, to offer your bodies as a living sacrifice, holy and pleasing to God — this is your spiritual service of worship."],
+      "12:2":  ["Romans 12:2",        "Do not be conformed to this world, but be transformed by the renewing of your mind."],
+      "1:9":   ["1 John 1:9",         "If we confess our sins, He is faithful and just to forgive us our sins and to cleanse us from all unrighteousness."],
+      "2:20":  ["Galatians 2:20",     "I have been crucified with Christ; and it is no longer I who live, but Christ lives in me."],
+      "3:23":  ["Lamentations 3:23",  "His mercies are new every morning; great is Your faithfulness."],
+      "4:31":  ["Isaiah 40:31",       "But those who hope in the LORD will renew their strength; they will soar on wings like eagles; they will run and not grow weary; they will walk and not faint."],
+      "5:11":  ["Hebrews 5:11",       "We have much to say about this, but it is hard to make it clear to you because you no longer try to understand."],
+      "6:9":   ["Matthew 6:9",        "This, then, is how you should pray: 'Our Father in heaven, hallowed be Your name.'"],
+      "7:1":   ["Matthew 7:1",        "Do not judge, or you too will be judged."],
+      "9:6":   ["Isaiah 9:6",         "For unto us a Child is born, unto us a Son is given; and the government will be on His shoulders. And He will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace."],
+      "10:27": ["John 10:27",         "My sheep listen to My voice; I know them, and they follow Me."],
+      "11:25": ["John 11:25",         "I am the resurrection and the life. He who believes in Me will live, even though he dies."],
+      "12:11": ["1 Corinthians 12:11","All these are the work of one and the same Spirit, who distributes them to each one as He determines."],
+    };
+
+    // Fallback verses, rotated by minute, when the exact key isn't in the dictionary.
+    const fallbacks = [
+      ["Psalm 23:1",      "The LORD is my shepherd; I shall not want."],
+      ["Psalm 46:10",     "Be still, and know that I am God."],
+      ["Psalm 27:1",      "The LORD is my light and my salvation — whom shall I fear? The LORD is the stronghold of my life — whom shall I dread?"],
+      ["Psalm 91:1",      "He who dwells in the shelter of the Most High will rest in the shadow of the Almighty."],
+      ["Psalm 119:105",   "Your word is a lamp to my feet and a light to my path."],
+      ["Isaiah 41:10",    "Do not fear, for I am with you; do not be afraid, for I am your God."],
+      ["Jeremiah 29:11",  "For I know the plans I have for you, declares the LORD — plans for welfare and not for evil, to give you a future and a hope."],
+      ["Joshua 1:9",      "Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go."],
+      ["1 Corinthians 13:13","And now these three remain: faith, hope, and love. But the greatest of these is love."],
+      ["Hebrews 13:5",    "I will never leave you nor forsake you."],
+    ];
+
+    const $time  = document.getElementById('liveTime');
+    const $verse = document.getElementById('liveVerse');
+    const $ref   = document.getElementById('liveRef');
+    let lastKey = null;
+
+    function lookup(h, m) {
+      const key = `${h}:${m}`;
+      if (verses[key]) return { ref: verses[key][0], text: verses[key][1] };
+      const f = fallbacks[(h + m) % fallbacks.length];
+      return { ref: f[0], text: f[1] };
+    }
+
+    function render() {
+      const now = new Date();
+      const h24 = now.getHours();
+      const h   = ((h24 + 11) % 12) + 1;
+      const m   = now.getMinutes();
+      const meridiem = h24 < 12 ? 'AM' : 'PM';
+      const key = `${h}:${m}`;
+
+      // Time always updates (so the meridiem flicker etc. is real)
+      $time.innerHTML = `${h}:${String(m).padStart(2,'0')}<span class="meridiem">${meridiem}</span>`;
+
+      // Verse only changes when the minute changes — give it a soft fade
+      if (key !== lastKey) {
+        const v = lookup(h, m);
+        $verse.classList.add('swap-out');
+        $ref.classList.add('swap-out');
+        setTimeout(() => {
+          $verse.textContent = `“${v.text}”`;
+          $ref.textContent   = `${v.ref} · Berean Standard Bible`;
+          $verse.classList.remove('swap-out');
+          $ref.classList.remove('swap-out');
+        }, 420);
+        lastKey = key;
+      }
+    }
+
+    render();
+    // Re-render every second so the time tracks even across minute boundaries reliably
+    setInterval(render, 1000);
+
+    // ---------- Reveal on scroll ----------
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    }
+  </script>
 </body>
 </html>
