@@ -522,7 +522,7 @@
       position: absolute;
       inset: 0;
       opacity: 0;
-      transition: opacity 1.1s ease;
+      transition: opacity 2.4s cubic-bezier(0.4, 0, 0.2, 1);
       pointer-events: none;
     }
     .carousel-slide.active { opacity: 1; pointer-events: auto; }
@@ -1077,9 +1077,20 @@
       const car = document.getElementById('carousel');
       if (car) {
         car.addEventListener('mouseenter', stop);
-        car.addEventListener('mouseleave', start);
+        car.addEventListener('mouseleave', () => { if (started) start(); });
       }
-      start();
+
+      let started = false;
+      function kickoff() { if (started) return; started = true; start(); }
+
+      if ('IntersectionObserver' in window && car) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { kickoff(); io.disconnect(); } });
+        }, { threshold: 0.4 });
+        io.observe(car);
+      } else {
+        kickoff();
+      }
     })();
   </script>
 </body>
