@@ -96,9 +96,30 @@
     }
     .nav-links a:hover { color: var(--gold-soft); }
 
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #0d0a08;
+      padding: 9px 18px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 8px 18px -10px rgba(201,166,107,0.45);
+      margin-left: auto;
+    }
+    .nav-cta:hover { background: var(--gold-soft); transform: translateY(-1px); }
+    .nav-cta svg { width: 14px; height: 14px; }
+
     .nav-toggle {
       display: none; background: none; border: none;
       cursor: pointer; padding: 8px;
+      margin-left: 18px;
     }
     .nav-toggle span {
       display: block; width: 22px; height: 1.5px;
@@ -726,6 +747,8 @@
     }
     @media (max-width: 600px) {
       nav { padding: 16px 22px; }
+      .nav-cta { padding: 8px 14px; font-size: 0.72rem; letter-spacing: 0.04em; }
+      .nav-toggle { margin-left: 12px; }
       .hero { padding: 110px 22px 70px; }
       .living, .editorial, .closing { padding: 110px 22px 100px; }
       .gallery-strip { padding: 100px 22px 90px; }
@@ -755,14 +778,18 @@
       <img src="app-icon.png" alt="">
       <span>FaithClock</span>
     </a>
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
     <div class="nav-links">
       <a href="#now">Live</a>
       <a href="#gallery">Gallery</a>
       <a href="support.html">Support</a>
     </div>
+    <a class="nav-cta" href="https://apps.apple.com/app/faith-clock-bible-clock/id6753986757">
+      <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM260.6 96c25.5-30.3 23.2-57.9 22.5-67.8C260.5 29.5 234.2 43.9 219 61.7c-16.7 19.1-26.5 42.7-24.4 67.4 24.6 1.9 47.1-10.7 65.9-33.1z"/></svg>
+      Download
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- Hero — preserved per user direction -->
