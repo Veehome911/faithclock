@@ -507,6 +507,77 @@
     }
     .plate.full img { height: auto; object-fit: contain; }
 
+    /* ---------- Carousel ---------- */
+    .carousel {
+      position: relative;
+      max-width: 560px;
+      margin: 0 auto;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-radius: 3px;
+      box-shadow: 0 30px 80px -28px rgba(0,0,0,0.7),
+                  0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.1s ease;
+      pointer-events: none;
+    }
+    .carousel-slide.active { opacity: 1; pointer-events: auto; }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(13,10,8,0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+      color: var(--cream);
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+      z-index: 2;
+    }
+    .carousel-arrow:hover { background: rgba(201,166,107,0.6); }
+    .carousel-arrow.prev { left: 18px; }
+    .carousel-arrow.next { right: 18px; }
+    .carousel-arrow svg { width: 18px; height: 18px; }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .carousel-dot {
+      width: 8px; height: 8px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: rgba(201,166,107,0.22);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .carousel-dot.active {
+      background: var(--gold);
+      transform: scale(1.35);
+    }
+    @media (max-width: 600px) {
+      .carousel { max-width: 100%; }
+      .carousel-arrow { width: 36px; height: 36px; }
+      .carousel-arrow.prev { left: 10px; }
+      .carousel-arrow.next { right: 10px; }
+    }
+
     /* ---------- Cream "Paper" section ---------- */
     .paper {
       background: var(--paper);
@@ -831,17 +902,18 @@
   <!-- Gallery -->
   <section class="gallery" id="gallery">
     <div class="gallery-strip">
-      <div class="gallery-stack">
-        <div class="plate full reveal">
-          <img src="screenshot-promo.jpg" alt="FaithClock on iPad">
-        </div>
-        <div class="plate full reveal">
-          <img src="screenshot-lifestyle.jpg" alt="FaithClock on iPad">
-        </div>
-        <div class="plate full reveal">
-          <img src="screenshot-app.jpg" alt="FaithClock on iPad">
-        </div>
+      <div class="carousel reveal" id="carousel" aria-roledescription="carousel">
+        <div class="carousel-slide active"><img src="screenshot-promo.jpg" alt="FaithClock on iPad"></div>
+        <div class="carousel-slide"><img src="screenshot-lifestyle.jpg" alt="FaithClock on iPad"></div>
+        <div class="carousel-slide"><img src="screenshot-app.jpg" alt="FaithClock on iPad"></div>
+        <button class="carousel-arrow prev" aria-label="Previous image" onclick="carouselGo(-1)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <button class="carousel-arrow next" aria-label="Next image" onclick="carouselGo(1)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
       </div>
+      <div class="carousel-dots" id="carouselDots"></div>
     </div>
   </section>
 
@@ -972,6 +1044,43 @@
     } else {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
     }
+
+    // ---------- Carousel ----------
+    (function () {
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dotsHost = document.getElementById('carouselDots');
+      if (!slides.length || !dotsHost) return;
+      let idx = 0;
+      let timer = null;
+      const ROTATE_MS = 5000;
+
+      slides.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        b.setAttribute('aria-label', `Show image ${i + 1}`);
+        b.addEventListener('click', () => { goTo(i); restart(); });
+        dotsHost.appendChild(b);
+      });
+      const dots = dotsHost.querySelectorAll('.carousel-dot');
+
+      function goTo(n) {
+        idx = (n + slides.length) % slides.length;
+        slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+      window.carouselGo = function (delta) { goTo(idx + delta); restart(); };
+
+      function start() { timer = setInterval(() => goTo(idx + 1), ROTATE_MS); }
+      function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+      function restart() { stop(); start(); }
+
+      const car = document.getElementById('carousel');
+      if (car) {
+        car.addEventListener('mouseenter', stop);
+        car.addEventListener('mouseleave', start);
+      }
+      start();
+    })();
   </script>
 </body>
 </html>
