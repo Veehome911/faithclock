@@ -889,7 +889,7 @@
       <p class="kicker">Right now, this minute</p>
       <div class="live-time" id="liveTime" aria-live="polite">3:16<span class="meridiem">PM</span></div>
       <p class="live-verse" id="liveVerse">"For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life."</p>
-      <p class="live-ref" id="liveRef">John 3:16 · Berean Standard Bible</p>
+      <p class="live-ref" id="liveRef">John 3:16</p>
       <p class="live-caption">Wait a minute. Watch what happens.</p>
     </div>
   </section>
@@ -973,7 +973,7 @@
       <p class="footer-meta">© 2026 FaithClock</p>
     </div>
     <p class="colophon">
-      Scripture: Berean Standard Bible. The BSB text has been dedicated to the public domain. Set in Fraunces &amp; DM Sans.
+      Set in Fraunces &amp; DM Sans.
     </p>
   </footer>
 
@@ -1013,7 +1013,7 @@
         $ref.classList.add('swap-out');
         setTimeout(() => {
           $verse.textContent = `“${v.text}”`;
-          $ref.textContent   = `${v.ref} · Berean Standard Bible`;
+          $ref.textContent   = v.ref;
           $verse.classList.remove('swap-out');
           $ref.classList.remove('swap-out');
         }, 420);
